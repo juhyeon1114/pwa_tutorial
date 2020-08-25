@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcus icon" href="/favicon.png">
+    <title>pwa offline - local</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+    <header>
+        <h1>Header</h1>
+    </header>
+    <main>
+        <div>
+            Main
+        </div>
+        <div>
+            <button id="installBtn">install</button>
+        </div>
+        <div>
+            <img src="/images/icons/192icon.png" alt="icon">
+        </div>
+    </main>
+</body>
+</html>
+<script>
+    /************************************************
+     * 서비스 워커가 있는지 파악한 후 서비스 워커 등록
+     * -> 서비스 워커에 해당하는 파일을 브라우저에 등록
+     ************************************************/
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js', {
+            scope: '.'
+        }).then(function(success) {
+            console.log('Service Worker 등록 성공 : ', success);
+        }).catch(function(error){
+            console.error('Service Worker 등록 실패 : ', error);
+        });
+    }
+    // window.onload() = function(){
+    //     let deferredPrompt;
+    //     // 설치 가능한지 확인
+    //     window.addEventListener('brforeinstallprompt', function(e){
+    //         console.log('beforeinstallprompt Event fired');
+    //         e.preventDefault();
+    //         deferredPrompt = e;
+    //     });
+    //     // 특정 버튼 클릭 시에 앱 설치
+    //     const installBtn = document.querySelector('installBtn');
+    //     installBtn.addEventListener('click', function(e){
+    //         deferredPrompt.prompt();
+    //         deferredPrompt.userChoice.then(function(result){
+    //             if (result === 'accepted') {
+    //                 console.log('The app has been installed');
+    //             }
+    //             deferredPrompt = null;
+    //         })
+    //     });
+    // }
+</script>
