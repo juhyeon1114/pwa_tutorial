@@ -17,7 +17,7 @@
             Main
         </div>
         <div>
-            <button id="installBtn">install</button>
+            <button onclick="auth()">install</button>
         </div>
         <div>
             <img src="/images/icons/192icon.png" alt="icon">
@@ -39,24 +39,21 @@
             console.error('Service Worker 등록 실패 : ', error);
         });
     }
-    // window.onload() = function(){
-    //     let deferredPrompt;
-    //     // 설치 가능한지 확인
-    //     window.addEventListener('brforeinstallprompt', function(e){
-    //         console.log('beforeinstallprompt Event fired');
-    //         e.preventDefault();
-    //         deferredPrompt = e;
-    //     });
-    //     // 특정 버튼 클릭 시에 앱 설치
-    //     const installBtn = document.querySelector('installBtn');
-    //     installBtn.addEventListener('click', function(e){
-    //         deferredPrompt.prompt();
-    //         deferredPrompt.userChoice.then(function(result){
-    //             if (result === 'accepted') {
-    //                 console.log('The app has been installed');
-    //             }
-    //             deferredPrompt = null;
-    //         })
-    //     });
-    // }
+    
+    function auth(){
+        Notification.requestPermission().then(function(result) {
+            if(result === 'granted') {
+                noti();
+            }
+        });
+    }
+
+    function noti() {
+        var options = {
+            body: 'hello',
+            icon: 'images/icons/192icon.png'
+        }
+        var notif = new Notification('title', options);
+        setTimeout(noti, 50000);
+    }
 </script>
