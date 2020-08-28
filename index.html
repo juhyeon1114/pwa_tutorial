@@ -17,7 +17,7 @@
             Main
         </div>
         <div>
-            <button onclick="auth()">install</button>
+            <button onclick="auth()">push</button>
         </div>
         <div>
             <img src="/images/icons/192icon.png" alt="icon">
@@ -42,9 +42,9 @@
     
     function auth(){
         Notification.requestPermission().then(function(result) {
-            if(result === 'granted') {
-                noti();
-            }
+            // if(result === 'granted') {
+            //     setTimeout(noti, 3000);
+            // }
         });
     }
 
@@ -54,6 +54,5 @@
             icon: 'images/icons/192icon.png'
         }
         var notif = new Notification('title', options);
-        setTimeout(noti, 50000);
     }
 </script>

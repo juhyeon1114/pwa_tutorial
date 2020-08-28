@@ -78,3 +78,21 @@ self.addEventListener('activate', function(event){
  * 서비스 워커 라이프 사이클
  * -> 서비스워커는 웹페이지와 별개의 생명주기를 갖는다  
  ************************************************/
+
+/************************************************
+ * 서비스 워커 push 이벤트 리스너
+ ************************************************/
+self.addEventListener('push', function(event){
+    console.log(1);
+    const title = 'Push event';
+    const options = {
+        body: event.data ? event.data.text() : 'no payload',
+        icon: 'images/icons/192icon.png'
+    }
+    event.waitUntil(
+        setTimeout(function(){
+            self.registration.showNotification(title, options)
+        }, 3000)
+        // self.registration.showNotification(title, options)
+    );
+})
